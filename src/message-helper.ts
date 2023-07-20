@@ -72,6 +72,13 @@ export class Rule {
   private checkHeader(): boolean {
     let header = this.commit.header.match(this.config.header.combined);
     let ok = true;
+    console.log('===== checkHeader array:', header);
+    if (Array.isArray(header) && header?.length) {
+      console.log('===== checkHeader type:', header[1]);
+      console.log('===== checkHeader scope:', header[2]);
+      console.log('===== checkHeader id:', header[3]);
+      console.log('===== checkHeader title:', header[4]);
+    }
 
     if (header == null) {
       ok = false;

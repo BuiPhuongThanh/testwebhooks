@@ -3525,9 +3525,9 @@ module.exports = function(e, t) {
             t.header.scope = /\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): /;
             t.header.subject = /.+/;
             if (e.compulsoryScope) {
-                t.header.combined = /^(feat|fix|remove|refactor|docs|chore|style|perf|vendor|ci|revert|build)\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): (.+)$/
+                t.header.combined = /^(feat|fix|remove|refactor|docs|chore|style|perf|vendor|ci|revert|build)\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): (.+)$/;
             } else {
-                t.header.combined = /^(feat|fix|remove|refactor|docs|chore|style|perf|vendor|ci|revert|build)\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): (.+)$/
+                t.header.combined = /^(feat|fix|remove|refactor|docs|chore|style|perf|vendor|ci|revert|build)\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): (.+)$/;
             }
             t.body = /^\n(.+\s*)*/;
             t.compulsoryScope = e.compulsoryScope;
@@ -5907,11 +5907,13 @@ module.exports = function(e, t) {
             }
             checkHeader() {
                 let e = this.commit.header.match(this.config.header.combined);
-                console.log('===== checkHeader e', e);
-                console.log('===== checkHeader type:', e[1]);
-                console.log('===== checkHeader scope:', e[2]);
-                console.log('===== checkHeader id:', e[3]);
-                console.log('===== checkHeader title:', e[4]);
+                console.log('===== checkHeader array:', e);
+                if (Array.isArray(e) && e?.length) {
+                    console.log('===== checkHeader type:', e[1]);
+                    console.log('===== checkHeader scope:', e[2]);
+                    console.log('===== checkHeader id:', e[3]);
+                    console.log('===== checkHeader title:', e[4]);
+                }
                 let r = true;
                 if (e == null) {
                     r = false;

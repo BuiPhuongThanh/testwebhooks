@@ -28,14 +28,18 @@ export function getConfig(settings: IGitActionSettings): IConfig {
   config.header = {} as RegexHeader;
 
   config.header.fixup = /(fixup! )*/;
-  config.header.type = /[a-zA-Z]+/;
-  config.header.scope = /\(([0-9a-zA-Z\-]+)\)/;
+  // config.header.type = /[a-zA-Z]+/;
+  config.header.type = /^(feat|fix|remove|refactor|docs|chore|style|perf|vendor|ci|revert|build)+/;
+  // config.header.scope = /\(([0-9a-zA-Z\-]+)\)/;
+  config.header.scope = /\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): /;
   config.header.subject = /.+/; // Strictly has atleast on charater
 
   if (settings.compulsoryScope) {
-    config.header.combined = /^([a-zA-Z]+)(\(([0-9a-zA-Z\-]+)\))!?: (.+)$/;
+    // config.header.combined = /^([a-zA-Z]+)(\(([0-9a-zA-Z\-]+)\))!?: (.+)$/;
+    config.header.combined = /^(feat|fix|remove|refactor|docs|chore|style|perf|vendor|ci|revert|build)\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): (.+)$/;
   } else {
-    config.header.combined = /^([a-zA-Z]+)(\(([0-9a-zA-Z\-]+)\))?!?: (.+)$/;
+    // config.header.combined = /^([a-zA-Z]+)(\(([0-9a-zA-Z\-]+)\))?!?: (.+)$/;
+    config.header.combined = /^(feat|fix|remove|refactor|docs|chore|style|perf|vendor|ci|revert|build)\(([0-9a-zA-Z\-]+)\)\s*#(\d{4,5}): (.+)$/;
   }
 
   config.body = /^\n(.+\s*)*/;
